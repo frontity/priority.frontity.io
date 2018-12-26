@@ -111,12 +111,28 @@ const System = types
     setPaste: paste => {
       self.paste = paste;
       try {
-        // self.size = /size: \*\*\(([\d.]+)M\)/i.exec(paste)[1];
-        // Object.keys(enums).forEach(enu => {
-        //   const rg = new RegExp(enu + ": \\*\\*([\\w-]+)", "i");
-        //   const res = rg.exec(paste);
-        //   if (res && res[1]) self[enu] = res[1];
-        // });
+        Object.values(self.inputs).forEach(input => {
+          const rg = new RegExp(`${input.name}: \\*\\*\\(([\\d.]+)\\)`, "i");
+          const res = rg.exec(paste);
+          if (res && res[1])
+            self.inputs.find(item => item.name === input.name).value = res[1];
+        });
+        Object.values(self.selects).forEach(select => {
+          const rg = new RegExp(`${select.name}: \\*\\*([\\w- ]+) `, "i");
+          const res = rg.exec(paste);
+          const validValues = select.items.map(item => item.name);
+          if (res && res[1] && validValues.indexOf(res[1]) !== -1)
+            self.selects.find(item => item.name === select.name).selected =
+              res[1];
+        });
+        Object.values(self.checkboxes).forEach(checkbox => {
+          const rg = new RegExp(`${checkbox.name}: \\*\\*yes `, "i");
+          const res = rg.exec(paste);
+          const checkboxItem = self.checkboxes.find(
+            item => item.name === checkbox.name
+          );
+          checkboxItem.active = !!res;
+        });
       } catch (error) {
         alert("Sorry, can't convert that text! Check the console.");
         console.error(error);
@@ -129,7 +145,6 @@ const System = types
       self.selects.find(item => item.name === name).selected = value;
     },
     setCheckbox: (name, value) => {
-      console.log(value);
       self.checkboxes.find(item => item.name === name).active = value;
     }
   }));
@@ -151,8 +166,6 @@ const defaultSnapshotHash = `${hash(defaultSnapshot)}`;
 
 const localSnapshotHash = window.localStorage.getItem("hash");
 
-console.log(defaultSnapshotHash, localSnapshotHash);
-
 const state =
   (localSnapshotHash === defaultSnapshotHash &&
     JSON.parse(window.localStorage.getItem("snapshot"))) ||
@@ -161,7 +174,6 @@ const state =
 const store = Store.create(state);
 
 onSnapshot(store, snapshot => {
-  console.log(snapshot);
   window.localStorage.setItem("hash", defaultSnapshotHash);
   window.localStorage.setItem("snapshot", JSON.stringify(snapshot));
 });

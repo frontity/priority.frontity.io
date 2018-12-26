@@ -14,14 +14,16 @@ const App = observer(() => (
   <>
     <h1>{store.selected.name} Priority System</h1>
     <Switch />
-    {store.selected.inputs.map(item => <Input key={item.name} item={item} />)}
+    {store.selected.inputs.map(item => (
+      <Input key={item.name} item={item} />
+    ))}
     {store.selected.selects.map(select => (
       <Select key={select.name} select={select} />
     ))}
     {store.selected.checkboxes.map(item => (
       <Checkbox key={item.name} item={item} />
     ))}
-    {/* <Paste /> */}
+    <Paste />
     <Result />
     <ReactMarkdown source={store.selected.instructions} />
   </>
