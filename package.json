@@ -1,0 +1,30 @@
+{
+  "name": "priority-system",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frontity/bug-priority-system.git"
+  },
+  "dependencies": {
+    "hash-it": "4.0.3",
+    "mobx": "5.5.2",
+    "mobx-react": "5.3.6",
+    "mobx-state-tree": "3.7.1",
+    "react": "16.7.0-alpha.0 - next",
+    "react-dom": "16.7.0-alpha.0 - next",
+    "react-markdown": "4.0.3",
+    "react-scripts": "2.1.0",
+    "styled-components": "4.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
+}
