@@ -112,13 +112,13 @@ const System = types
       self.paste = paste;
       try {
         Object.values(self.inputs).forEach(input => {
-          const rg = new RegExp(`${input.name}: \\*\\*\\(([\\d.]+)\\)`, "i");
+          const rg = new RegExp(`${input.name}: \\*?\\*?\\(([\\d.]+)\\)`, "i");
           const res = rg.exec(paste);
           if (res && res[1])
             self.inputs.find(item => item.name === input.name).value = res[1];
         });
         Object.values(self.selects).forEach(select => {
-          const rg = new RegExp(`${select.name}: \\*\\*([\\w- ]+) `, "i");
+          const rg = new RegExp(`${select.name}: \\*?\\*?([\\w- ]+) `, "i");
           const res = rg.exec(paste);
           const validValues = select.items.map(item => item.name);
           if (res && res[1] && validValues.indexOf(res[1]) !== -1)
@@ -126,7 +126,7 @@ const System = types
               res[1];
         });
         Object.values(self.checkboxes).forEach(checkbox => {
-          const rg = new RegExp(`${checkbox.name}: \\*\\*yes `, "i");
+          const rg = new RegExp(`${checkbox.name}: \\*?\\*?yes `, "i");
           const res = rg.exec(paste);
           const checkboxItem = self.checkboxes.find(
             item => item.name === checkbox.name
@@ -176,6 +176,7 @@ const store = Store.create(state);
 onSnapshot(store, snapshot => {
   window.localStorage.setItem("hash", defaultSnapshotHash);
   window.localStorage.setItem("snapshot", JSON.stringify(snapshot));
+  console.log(snapshot);
 });
 
 export default store;
