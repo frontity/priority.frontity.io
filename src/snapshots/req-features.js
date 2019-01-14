@@ -61,7 +61,7 @@ export default {
       items: [
         {
           name: "production",
-          value: 3,
+          value: 10,
           description: "the feature is needed for a production site."
         },
         {
@@ -100,13 +100,13 @@ export default {
         },
         {
           name: "broad",
-          value: 6,
+          value: 3,
           description:
             "the feature could be useful for many blogs. Includes integrations of WP plugins, Ad servers..."
         },
         {
           name: "everyone",
-          value: 10,
+          value: 5,
           description:
             "the feature will improve the apps of every Frontity site."
         }
