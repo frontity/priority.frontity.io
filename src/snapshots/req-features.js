@@ -37,7 +37,7 @@ export default {
       items: [
         {
           name: "no frontity without it",
-          value: 10,
+          value: 15,
           description:
             "the site owner won't use Frontity if the feature is not present."
         },
